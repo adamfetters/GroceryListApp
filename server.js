@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyparser = require('body-parser');
-const CORS = require('cors');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 const googleMapsClient = require('@google/maps').createClient({
@@ -17,13 +17,14 @@ const allowedClients = {
   origin: 'http://localhost:3000',
 };
 
-server.use(CORS(allowedClients));
+server.use(cors());
 
 const port = process.env.PORT || 5000;
 
 server.get('/api/stores/:zip/:distance', (req, res) => {
   const zip = req.params.zip;
   const distance = Number(req.params.distance);
+  console.log('Google API called');
 
   googleMapsClient.places(
     {
