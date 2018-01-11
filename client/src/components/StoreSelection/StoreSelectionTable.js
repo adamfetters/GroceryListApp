@@ -18,24 +18,26 @@ class StoreSelectionTable extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get('http://localhost:5000/api/stores/45331/10')
-      .then(response => {
-        this.setState({ stores: response.data });
-        console.log('recieved stores');
-      })
-      .catch(error => {
-        console.log('An error has occured', error);
-      });
+    return axios({
+      method: 'get',
+      url: 'http://localhost:5000/api/stores/42343/10',
+    }).then(results => {
+      this.setState({ stores: results.data });
+    });
   }
 
   render() {
     return (
       <div className="header">
-        <h2>Store Selection</h2>
-        <ul>
-          {this.state.stores.map((store, index) => <Store key={index} store={store})}
-        </ul>
+        {this.state.stores
+          ? this.state.stores.map((store, i) => (
+              <div className="store" key={i}>
+                <div className="store-name">
+                  <b>{store.name}</b>
+                </div>
+              </div>
+            ))
+          : null}
       </div>
     );
   }
