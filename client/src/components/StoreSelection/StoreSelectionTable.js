@@ -30,9 +30,9 @@ class StoreSelectionTable extends Component {
     return (
       <div>
         <div className="header">Stores</div>
-        <div>
+        <ul>
           {this.state.stores ? this.state.stores.map((store, index) => <Store key={index} store={store} />) : null}
-        </div>
+        </ul>
       </div>
     );
   }
