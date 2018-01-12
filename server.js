@@ -23,7 +23,8 @@ const port = process.env.PORT || 5000;
 
 server.get('/api/stores/:zip/:distance', (req, res) => {
   const zip = req.params.zip;
-  const distance = Number(req.params.distance);
+  const distance = Number(req.params.distance) * 1609.34;
+  console.log(`distance in meters: ${distance}`);
   console.log('Google API called');
 
   googleMapsClient.places(

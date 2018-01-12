@@ -8,6 +8,7 @@ class StoreSelectionInputBar extends Component {
 
     this.handleLocationInputChange = this.handleLocationInputChange.bind(this);
     this.handleDistanceInputChange = this.handleDistanceInputChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   handleLocationInputChange (e) {
@@ -18,9 +19,14 @@ class StoreSelectionInputBar extends Component {
     this.props.onDistanceInputChange(e.target.value);
   }
 
+  onSubmit (e) {
+    e.preventDefault();
+    this.props.onSubmit();
+  }
+
   render () {
     return (
-      <form className='input'>
+      <form className='input' onSubmit={this.onSubmit}>
         <input
           type='text'
           placeholder='location'
@@ -30,10 +36,13 @@ class StoreSelectionInputBar extends Component {
 
         <input
           type='text'
-          placeholder='distance'
+          placeholder='radius (max: 30 Miles)'
           value={this.props.distance}
           onChange={this.handleDistanceInputChange}
         />
+        <p>
+          <input type='submit' value='submit' />
+        </p>
       </form>
     );
   }

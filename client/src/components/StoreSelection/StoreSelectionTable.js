@@ -17,16 +17,17 @@ class StoreSelectionTable extends Component {
 
     this.handleDistanceChange = this.handleDistanceChange.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.getStores = this.getStores.bind(this);
   }
 
-  componentDidMount () {
-    return axios({
-      method: 'get',
-      url: 'http://localhost:5000/api/stores/42343/10'
-    }).then(results => {
-      this.setState({ stores: results.data });
-    });
-  }
+  // componentDidMount () {
+  //   return axios({
+  //     method: 'get',
+  //     url: 'http://localhost:5000/api/stores/42343/10'
+  //   }).then(results => {
+  //     this.setState({ stores: results.data });
+  //   });
+  // }
 
   handleLocationChange (location) {
     this.setState({
@@ -40,6 +41,16 @@ class StoreSelectionTable extends Component {
     });
   }
 
+  getStores () {
+    const { location, distance } = this.state;
+    return axios({
+      method: 'get',
+      url: `http://localhost:5000/api/stores/${location}/${distance}`
+    }).then(results => {
+      this.setState({ stores: results.data });
+    });
+  }
+
   render () {
     return (
       <div>
@@ -49,6 +60,7 @@ class StoreSelectionTable extends Component {
           distance={this.state.distance}
           onLocationInputChange={this.handleLocationChange}
           onDistanceInputChange={this.handleDistanceChange}
+          onSubmit={this.getStores}
         />
         <ul>
           {this.state.stores
