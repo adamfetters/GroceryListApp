@@ -4,7 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const googleMapsClient = require('@google/maps').createClient({
-  key: 'AIzaSyC - laRFAGMaQhGGH8Mb0qTt71rAlVjqSDk',
+  key: 'AIzaSyC - laRFAGMaQhGGH8Mb0qTt71rAlVjqSDk'
 });
 
 const User = require('./api/Users/UserModel');
@@ -14,7 +14,7 @@ const server = express();
 server.use(bodyparser.json());
 
 const allowedClients = {
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:3000'
 };
 
 server.use(cors());
@@ -30,9 +30,9 @@ server.get('/api/stores/:zip/:distance', (req, res) => {
     {
       query: `grocery in ${zip}`,
       radius: distance,
-      type: 'grocery',
+      type: 'grocery'
     },
-    function(err, response) {
+    function (err, response) {
       if (!err) {
         const storeResults = response.json.results;
         res.status(200).json(storeResults);
@@ -57,7 +57,7 @@ server.post('/users', (req, res) => {
       .catch(error => {
         res.status(500).json({
           message: 'There was an error while saving user to the database',
-          error,
+          error
         });
       });
   }
@@ -67,10 +67,12 @@ mongoose.Promise = global.Promise;
 mongoose
   .connect('mongodb://localhost/users', { useMongoClient: true })
   .then(() => {
-    server.listen(port, () => {
-      console.log(`Server running on port ${port}`);
-    });
+    console.log('Database connected');
   })
   .catch(error => {
     console.log('Database connection failed');
   });
+
+server.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});

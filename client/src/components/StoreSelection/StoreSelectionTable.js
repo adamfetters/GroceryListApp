@@ -2,36 +2,60 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import StoreSelectionInputBar from './StoreSelectionInputBar';
+
 import Store from './Store';
 
 class StoreSelectionTable extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = {
       location: '',
       distance: '',
-      stores: [],
+      stores: []
     };
 
-    // this.submit = this.submit.bind(this);
+    this.handleDistanceChange = this.handleDistanceChange.bind(this);
+    this.handleLocationChange = this.handleLocationChange.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount () {
     return axios({
       method: 'get',
-      url: 'http://localhost:5000/api/stores/42343/10',
+      url: 'http://localhost:5000/api/stores/42343/10'
     }).then(results => {
       this.setState({ stores: results.data });
     });
   }
 
-  render() {
+  handleLocationChange (location) {
+    this.setState({
+      location
+    });
+  }
+
+  handleDistanceChange (distance) {
+    this.setState({
+      distance
+    });
+  }
+
+  render () {
     return (
       <div>
-        <div className="header">Stores</div>
+        <div className='header'>Stores</div>
+        <StoreSelectionInputBar
+          location={this.state.location}
+          distance={this.state.distance}
+          onLocationInputChange={this.handleLocationChange}
+          onDistanceInputChange={this.handleDistanceChange}
+        />
         <ul>
-          {this.state.stores ? this.state.stores.map((store, index) => <Store key={index} store={store} />) : null}
+          {this.state.stores
+            ? this.state.stores.map((store, index) =>
+              <Store key={index} store={store} />
+              )
+            : null}
         </ul>
       </div>
     );
