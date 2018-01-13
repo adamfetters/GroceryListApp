@@ -20,15 +20,6 @@ class StoreSelectionTable extends Component {
     this.getStores = this.getStores.bind(this);
   }
 
-  // componentDidMount () {
-  //   return axios({
-  //     method: 'get',
-  //     url: 'http://localhost:5000/api/stores/42343/10'
-  //   }).then(results => {
-  //     this.setState({ stores: results.data });
-  //   });
-  // }
-
   handleLocationChange (location) {
     this.setState({
       location

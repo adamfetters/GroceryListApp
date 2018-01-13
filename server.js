@@ -7,7 +7,7 @@ const googleMapsClient = require('@google/maps').createClient({
   key: 'AIzaSyC - laRFAGMaQhGGH8Mb0qTt71rAlVjqSDk'
 });
 
-const User = require('./api/Users/UserModel');
+const User = require('./Data/Models/Users/UserModel');
 
 const server = express();
 
