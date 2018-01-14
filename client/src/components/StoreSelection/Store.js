@@ -3,14 +3,15 @@ import React from 'react';
 import './store.css';
 
 const Store = props => {
-  const toggleSelect = (e, data) => {
-    alert(data);
-
-    // this.props.toggleSelect(e.target.value);
-  };
+  const classStyle = props.store.selected ? 'selected' : 'not-selected';
   return (
-    <div className="col-md-4">
-      <li className="store-list" onClick={e => toggleSelect(e, data)}>
+    <div>
+      <li
+        className={classStyle}
+        onClick={() => {
+          props.onToggleSelect(props.index);
+        }}
+      >
         {props.store.name}
         <p>{props.store.formatted_address}</p>
       </li>

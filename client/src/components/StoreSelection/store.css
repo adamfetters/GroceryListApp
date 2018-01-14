@@ -4,3 +4,11 @@
   border: solid blue 2px;
   margin: 10px;
 }
+
+.selected {
+  border: solid 3px red;
+}
+
+.not-selected {
+  border: solid 1px black;
+}

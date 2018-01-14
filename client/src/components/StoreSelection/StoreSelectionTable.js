@@ -14,7 +14,6 @@ class StoreSelectionTable extends Component {
       location: '',
       distance: '',
       stores: [],
-      selected: false,
     };
 
     this.handleDistanceChange = this.handleDistanceChange.bind(this);
@@ -35,19 +34,26 @@ class StoreSelectionTable extends Component {
     });
   }
 
-  toggleSelected() {
-    alert('clicked');
+  toggleSelected(index) {
+    const currentStores = this.state.stores;
+    const currentSelectedState = currentStores.selected;
+    const newSelectedState = !currentSelectedState;
+    currentStores[index].selected = newSelectedState;
     this.setState({
-      selected: !this.state.selected,
+      stores: currentStores,
     });
   }
 
   getStores() {
     const { location, distance } = this.state;
+
     return axios({
       method: 'get',
       url: `http://localhost:5000/api/stores/${location}/${distance}`,
     }).then(results => {
+      results.data.forEach(element => {
+        element.selected = false;
+      });
       this.setState({ stores: results.data });
     });
   }
@@ -67,7 +73,7 @@ class StoreSelectionTable extends Component {
         <ul>
           {this.state.stores
             ? this.state.stores.map((store, index) => (
-                <Store key={index} index={index} store={store} toggleSelect={this.toggleSelected} />
+                <Store key={index} index={index} store={store} onToggleSelect={this.toggleSelected} />
               ))
             : null}
         </ul>
