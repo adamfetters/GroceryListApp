@@ -1,12 +1,17 @@
 .store-list {
+  box-sizing: content-box;
   text-align: center;
+  width: 400px;
   list-style: none;
-  border: solid blue 2px;
+
   margin: 10px;
 }
 
+.store {
+}
+
 .selected {
-  border: solid 3px red;
+  border: solid 3px blue;
 }
 
 .not-selected {

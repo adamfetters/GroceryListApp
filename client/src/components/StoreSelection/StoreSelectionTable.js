@@ -36,8 +36,10 @@ class StoreSelectionTable extends Component {
 
   toggleSelected(index) {
     const currentStores = this.state.stores;
-    const currentSelectedState = currentStores.selected;
+    const currentSelectedState = currentStores[index].selected;
+    console.log(currentSelectedState);
     const newSelectedState = !currentSelectedState;
+    console.log(newSelectedState);
     currentStores[index].selected = newSelectedState;
     this.setState({
       stores: currentStores,
@@ -69,14 +71,15 @@ class StoreSelectionTable extends Component {
           onDistanceInputChange={this.handleDistanceChange}
           onSubmit={this.getStores}
         />
-
-        <ul>
-          {this.state.stores
-            ? this.state.stores.map((store, index) => (
-                <Store key={index} index={index} store={store} onToggleSelect={this.toggleSelected} />
-              ))
-            : null}
-        </ul>
+        <div>
+          <ul>
+            {this.state.stores
+              ? this.state.stores.map((store, index) => (
+                  <Store key={index} index={index} store={store} onToggleSelect={this.toggleSelected} />
+                ))
+              : null}
+          </ul>
+        </div>
       </div>
     );
   }

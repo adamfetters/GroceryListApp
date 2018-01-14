@@ -5,7 +5,7 @@ import './store.css';
 const Store = props => {
   const classStyle = props.store.selected ? 'selected' : 'not-selected';
   return (
-    <div>
+    <div className="store-list col-md-4">
       <li
         className={classStyle}
         onClick={() => {
