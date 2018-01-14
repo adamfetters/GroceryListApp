@@ -21,6 +21,10 @@ server.use(cors());
 
 const port = process.env.PORT || 5000;
 
+server.get('/', (req, res) => {
+  res.send('Welcome to NodeJS APP on Heroku');
+})
+
 server.get('/api/stores/:zip/:distance', (req, res) => {
   const zip = req.params.zip;
   const distance = Number(req.params.distance) * 1609.34;
