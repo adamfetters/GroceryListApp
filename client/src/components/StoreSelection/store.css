@@ -1,4 +1,6 @@
 .store-list {
   text-align: center;
   list-style: none;
+  border: solid blue 2px;
+  margin: 10px;
 }
